@@ -10,11 +10,11 @@ var db = pgp(connectionString);
 
 function getAllTacos (req, res, next) {
   db.any('select * from tacos')
-    .then(function (data) {
+    .then(function (tacos) {
       res.status(200)
         .json({
           status: 'success',
-          data: data,
+          data: tacos,
           message: 'Retrieved ALL tacos'
         });
     })
