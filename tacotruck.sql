@@ -22,8 +22,8 @@ CREATE TABLE tacos (
 
 CREATE TABLE taco_ingredients (
   ID SERIAL PRIMARY KEY,
-  taco_id INTEGER references tacos(ID) NOT NULL,
-  ingredient_id INTEGER references ingredients(ID) NOT NULL
+  taco_id INTEGER NOT NULL,
+  ingredient_id INTEGER NOT NULL
 );
 
 INSERT INTO trucks (name)
