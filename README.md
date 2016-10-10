@@ -38,6 +38,6 @@ In this taco truck world, there are a few rules.
 - Each taco must be unique
 - Tacos are patented, so the trucks cannot sell the same taco
 
-To help reinforce these rules I am going to explore writing custom validations so that the user of this API can know that they need to follow these rules when sending `POST` requests.
+To help reinforce these rules I have put some restrictions on the data going into the database. I am also going to explore writing custom validations so that the user of this API can know that they need to follow these rules when sending `POST` requests.
 
 ##Starting out with a simple DB query
