@@ -41,3 +41,59 @@ In this taco truck world, there are a few rules.
 To help reinforce these rules I have put some restrictions on the data going into the database. I am also going to explore writing custom validations so that the user of this API can know that they need to follow these rules when sending `POST` requests.
 
 ##Starting out with a simple DB query
+
+Let's start out with a simple query and select all of the rows from the tacos table.
+
+In `routes/index.js` we want to make sure we have access to out `queries.js` file
+```javascript
+var db = require('../queries');
+```
+Then we need to add the route
+```javascript
+router.get('/api/tacos', db.getAllTacos);
+```
+Finally in `queries.js` we need to write the SQL to query the database and send back a 200, all okay, to display the data in a JSON format. For this step we need to write a function that uses pg-promise.js so that all of our SQL queries are returned as promises.
+
+Here's the setup:
+```javascript
+var promise = require('bluebird');
+
+var options = {
+  promiseLib: promise
+};
+
+var pgp = require('pg-promise')(options);
+var connectionString = 'postgres://localhost:5432/tacotrucks';
+var db = pgp(connectionString);
+```
+
+Here's the `requestAllTacos` function:
+```javascript
+function getAllTacos (req, res, next) {
+  db.any('select * from tacos')
+    .then(function (tacos) {
+      res.status(200)
+        .json({
+          status: 'success',
+          data: tacos,
+          message: 'all the tacos'
+        });
+    })
+    .catch(function (err) {
+      return next(err);
+    });
+}
+```
+
+Boot up the server `npm start` and make a `GET` request to `localhost:3000/api/tacos` and you will see our JSON object with all of our tacos (in this case only two) in the data key.
+```
+{
+  "status":"success",
+  "data":[
+          {"id":1,"name":"Arabe","truck_id":1},
+          {"id":2,"name":"Spicy Shroom","truck_id":1}
+         ],
+  "message":"Retrieved ALL tacos"
+}
+```
+But what if I want to display the name of the truck instead of the truck ID or what if I wanted to show all if the ingredients in each of the tacos? We're going to need some `JOIN`s for that.
