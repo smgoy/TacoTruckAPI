@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-var mongoOp = require('../models/trucks');
+var mongoOp = require('./models/trucks');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
