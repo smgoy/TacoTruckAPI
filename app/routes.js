@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-var mongoOp = require('./models/trucks');
+var db = require('../config/db');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -10,7 +10,7 @@ router.get('/', function(req, res, next) {
 
 router.get('/api/tacos', function(req, res){
   var response = {};
-  mongoOp.find({}, function(err, data){
+  db.Taco.find({}, function(err, data){
     if (err) {
       response = {"error" : true,"message" : "Error fetching data"};
     } else {
