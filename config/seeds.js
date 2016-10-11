@@ -1,8 +1,19 @@
 var Truck = require('../app/models/trucks');
 var Taco = require('../app/models/tacos');
 
-module.exports = function () {
+var mongoose = require('mongoose');
+
+console.log('connecting to db');
+
+mongoose.connect('mongodb://localhost/tacoTruckAPI',function(){
+
+  console.log('dropping db...');
+
+  mongoose.connection.db.dropDatabase();
+
+  console.log('seeding db...');
   Truck.create({name: 'Taco Bamba'});
+  Truck.create({name: 'District Taco'});
   Taco.create({
     name: 'Arabe',
     truck: 'Taco Bamba',
@@ -23,4 +34,16 @@ module.exports = function () {
       'Pepitas'
     ]
   });
-};
+  Taco.create({
+    name: 'Al Pastor',
+    truck: 'District Taco',
+    ingredients: [
+      'Pork',
+      'Shredded Cheese',
+      'Pico de Gallo',
+      'Jalepenos'
+    ]
+  });
+
+  console.log('Done!');
+});

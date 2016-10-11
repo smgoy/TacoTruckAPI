@@ -12,9 +12,9 @@ router.get('/api/tacos', function(req, res){
   var response = {};
   db.Taco.find({}, function(err, data){
     if (err) {
-      response = {"error" : true,"message" : "Error fetching data"};
+      response = {"error" : true, "message" : "Error fetching data"};
     } else {
-      response = {"error" : false,"message" : data};
+      response = { data };
     }
     res.json(response);
   });
