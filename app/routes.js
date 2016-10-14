@@ -10,5 +10,6 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/api/tacos', tacos.getAllTacos);
+router.get('/api/tacos/:truck', tacos.getTacosByTruck);
 
 module.exports = router;
