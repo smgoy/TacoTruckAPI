@@ -32,7 +32,33 @@ function getTacosByTruck(req, res) {
   });
 }
 
+function addTaco(req, res) {
+  var taco = new db.Taco();
+  taco.name = req.query.name;
+  taco.truck = req.query.truck;
+  taco.ingredients = req.query.ingredients;
+
+  taco.save(function(err) {
+    if (err) {
+      res.json(err);
+    } else {
+      res.json({ message: `${taco.name} created!` });
+    }
+  });
+}
+
+function updateTaco() {
+
+}
+
+function deleteTaco() {
+
+}
+
 module.exports = {
   getAllTacos,
-  getTacosByTruck
+  getTacosByTruck,
+  addTaco,
+  updateTaco,
+  deleteTaco
 };

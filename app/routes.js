@@ -10,8 +10,14 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
+//taco routes
 router.get('/api/tacos', tacos.getAllTacos);
 router.get('/api/tacos/:truck', tacos.getTacosByTruck);
+router.post('/api/tacos', tacos.addTaco);
+router.put('/api/taco/:taco', tacos.updateTaco);
+router.delete('/api/taco/:taco', tacos.deleteTaco);
+
+//truck routes
 router.get('/api/trucks', trucks.getAllTrucks);
 router.post('/api/trucks', trucks.addTruck);
 router.put('/api/trucks/:truck', trucks.updateTruck);
