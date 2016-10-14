@@ -18,7 +18,6 @@ function getAllTacos(req, res){
 function getTacosByTruck(req, res) {
   var response = {};
   var truck = helpers.capitalize(req.params.truck.replace('-', ' '));
-  console.log(truck);
   db.Taco.find({
     truck
   }, function(err, data){

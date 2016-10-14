@@ -13,6 +13,61 @@ function getAllTrucks(req, res) {
   });
 }
 
+function addTruck(req, res) {
+  var truck = new db.Truck();
+  truck.name = req.query.name;
+
+  truck.save(function(err) {
+    if (err) {
+      res.json(err);
+    } else {
+      res.json({ message: `${truck.name} created!` });
+    }
+  });
+}
+
+function updateTruck(req, res) {
+  var name = helpers.capitalize(req.params.truck.replace('-', ' '));
+  db.Truck.findOne({
+    name
+  }, function(err, truck) {
+    if (err) {
+      res.json(err);
+    } else {
+      truck.name = req.query.name;
+      truck.save(function(error) {
+        if(error) {
+          res.json(err);
+        } else {
+          res.json({message: `Truck updated to ${truck.name}`});
+        }
+      });
+    }
+  });
+}
+
+function deleteTruck(req, res) {
+  var name = helpers.capitalize(req.params.truck.replace('-', ' '));
+  db.Truck.findOne({
+    name
+  }, function(err, truck) {
+    if (err) {
+      res.json(err);
+    } else {
+      truck.remove(function(error) {
+        if(error) {
+          res.json(error);
+        } else {
+          res.json({message: `${truck.name} deleted`});
+        }
+      });
+    }
+  });
+}
+
 module.exports = {
-  getAllTrucks
+  getAllTrucks,
+  addTruck,
+  updateTruck,
+  deleteTruck
 };
