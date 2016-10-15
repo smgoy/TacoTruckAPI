@@ -5,19 +5,19 @@ var router = express.Router();
 var tacos = require('./queries/tacos');
 var trucks = require('./queries/trucks');
 
-/* GET home page. */
+/* GET index page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+  res.sendFile('index.html', {root: './views/'});
 });
 
-//taco routes
+//taco API routes
 router.get('/api/tacos', tacos.getAllTacos);
 router.get('/api/tacos/:truck', tacos.getTacosByTruck);
 router.post('/api/tacos', tacos.addTaco);
 router.put('/api/tacos/:taco', tacos.updateTaco);
 router.delete('/api/tacos/:taco', tacos.deleteTaco);
 
-//truck routes
+//truck API routes
 router.get('/api/trucks', trucks.getAllTrucks);
 router.post('/api/trucks', trucks.addTruck);
 router.put('/api/trucks/:truck', trucks.updateTruck);
