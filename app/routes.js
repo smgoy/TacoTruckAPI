@@ -14,8 +14,8 @@ router.get('/', function(req, res, next) {
 router.get('/api/tacos', tacos.getAllTacos);
 router.get('/api/tacos/:truck', tacos.getTacosByTruck);
 router.post('/api/tacos', tacos.addTaco);
-router.put('/api/taco/:taco', tacos.updateTaco);
-router.delete('/api/taco/:taco', tacos.deleteTaco);
+router.put('/api/tacos/:taco', tacos.updateTaco);
+router.delete('/api/tacos/:taco', tacos.deleteTaco);
 
 //truck routes
 router.get('/api/trucks', trucks.getAllTrucks);

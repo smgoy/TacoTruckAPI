@@ -25,7 +25,7 @@ function getTacosByTruck(req, res) {
       response = {"error" : true, "message" : "Error fetching data"};
     } else {
       response = {
-        data: helpers.parseData(data, 'name', 'truck', 'ingredients')
+        data: helpers.parseData(data, 'name', 'ingredients')
       };
     }
     res.json(response);
@@ -47,12 +47,35 @@ function addTaco(req, res) {
   });
 }
 
-function updateTaco() {
-
+function updateTaco(req, res) {
+  var name = helpers.capitalize(req.params.taco.replace('-', ' '));
+  var query = req.query;
+  db.Taco.update({ name }, { $set: query }, function(err) {
+    if(err) {
+      res.json(err);
+    } else {
+      res.json({message: 'Taco updated'});
+    }
+  });
 }
 
-function deleteTaco() {
-
+function deleteTaco(req, res) {
+  var name = helpers.capitalize(req.params.taco.replace('-', ' '));
+  db.Taco.findOne({
+    name
+  }, function(err, taco) {
+    if (err) {
+      res.json(err);
+    } else {
+      taco.remove(function(error) {
+        if(error) {
+          res.json(error);
+        } else {
+          res.json({message: `${name} deleted`});
+        }
+      });
+    }
+  });
 }
 
 module.exports = {
