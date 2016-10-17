@@ -16,7 +16,7 @@ function getAllTrucks(req, res) {
 
 function addTruck(req, res) {
   var truck = new db.Truck();
-  truck.name = req.query.name;
+  truck.name = req.body.name;
 
   truck.save(function(err) {
     if (err) {

@@ -4,15 +4,31 @@ import $ from 'JQuery';
 class AddTruck extends React.Component {
   constructor(props) {
     super(props);
-    
+    this.state = {
+      name: ''
+    };
   }
 
-  searchTrucks() {
+  updateName(e) {
+    this.setState({name: this.capitalize(e.currentTarget.value)});
+  }
+
+  capitalize(text) {
+    if (text === '') return '';
+    return text.split(' ').map(word => {
+      if (word[0] === undefined) return '';
+      return word[0].toUpperCase() + word.slice(1, word.length);
+    }).join(' ');
+  }
+
+  addTruck(e) {
+    e.preventDefault();
     $.ajax({
       url: 'api/trucks',
-      method: 'GET',
-      dataType: 'json',
-      success: data => console.log(data)
+      method: 'POST',
+      data: this.state,
+      success: data => console.log(data),
+      error: data => console.log(data)
     });
   }
 
@@ -24,14 +40,17 @@ class AddTruck extends React.Component {
           trucks in out database, use the form below to input a new
           truck name.
         </p>
-        <form>
-          <input type='text'
-                 name='truck'
-                 placeholder='Enter a Truck Name'
-                 className='search-bar'
-                 onChange={this.searchTrucks}>
+        <form onSubmit={this.addTruck.bind(this)}>
+          <div className='inline-text'>
+            <input type='text'
+                   name='truck'
+                   placeholder='Enter a Truck Name'
+                   className='search-bar'
+                   onChange={this.updateName.bind(this)}>
 
-          </input>
+            </input>
+            <p>{this.state.name}</p>
+          </div>
         </form>
       </div>
     );
