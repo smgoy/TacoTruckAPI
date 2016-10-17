@@ -1,9 +1,13 @@
 import React from 'react';
-import SearchBar from './components/search_bar';
 import ShowTrucks from './components/all_trucks_button';
+import NewTruck from './components/new_truck';
+
 
 const App = () => (
-  <ShowTrucks />
+  <div>
+    <ShowTrucks />
+    <NewTruck />
+  </div>
 );
 
 export default App;

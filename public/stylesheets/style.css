@@ -28,12 +28,16 @@ body {
 	color: #3c3c3c;
 }
 
+#root {
+	margin: 50px 150px;
+}
+
 .center-button {
 	width: 25%;
 	margin: 0 auto;
 }
 
-.show-trucks {
+.show-trucks-button {
 	width: 100%;
 	font-size: 16px;
 	background-color: #626e60;
@@ -43,12 +47,31 @@ body {
 	color: #fff;
 }
 
+.display-trucks {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: center;
+	margin: 5px;
+	background-color: #af473c;
+	border-radius: 5px;
+}
+
+.trucks {
+	padding: 10px 7px;
+	font-weight: 600;
+}
+
+.description-text {
+	margin: 25px 0;
+}
+
 .search-bar {
 	border-radius: 5px;
 	width: 33%;
 	font-size: 16px;
 	border: 1px solid #626e60;
-	padding: 5px 2px;
+	padding: 5px 3px;
 }
 
 .search-bar:focus {

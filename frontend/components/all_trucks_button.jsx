@@ -21,7 +21,7 @@ class ShowTrucks extends React.Component {
 
   displayData() {
     return this.state.data.map(truckName => (
-      <li key={truckName}>{truckName}</li>
+      <li key={truckName} className='trucks'>{truckName}</li>
     ));
   }
 
@@ -29,7 +29,7 @@ class ShowTrucks extends React.Component {
     return (
       <div>
         <div className='center-button'>
-          <button className='show-trucks'
+          <button className='show-trucks-button'
                   onClick={this.showTrucks}>
             Show all trucks
           </button>
