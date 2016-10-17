@@ -1,0 +1,56 @@
+/*resets*/
+html, body, div, span,
+h1, h2, h3, h4, h5, h6, p,
+a, img, ol, ul, li, form, input,
+button {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+
+button:focus, input:focus {
+	outline: 0;
+}
+
+button:hover {
+	cursor: pointer;
+}
+
+ol, ul {
+	list-style: none;
+}
+
+body {
+  font-family: 'Raleway', serif;
+	color: #3c3c3c;
+}
+
+.center-button {
+	width: 25%;
+	margin: 0 auto;
+}
+
+.show-trucks {
+	width: 100%;
+	font-size: 16px;
+	background-color: #626e60;
+	padding: 5px 0;
+	border-radius: 5px;
+	border: 2px solid #3c3c3c;
+	color: #fff;
+}
+
+.search-bar {
+	border-radius: 5px;
+	width: 33%;
+	font-size: 16px;
+	border: 1px solid #626e60;
+	padding: 5px 2px;
+}
+
+.search-bar:focus {
+	border: 2px solid #626e60;
+}
