@@ -5,7 +5,9 @@ class AddTruck extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: ''
+      name: '',
+      success: '',
+      error: '' //need to add custom validation
     };
   }
 
@@ -27,9 +29,13 @@ class AddTruck extends React.Component {
       url: 'api/trucks',
       method: 'POST',
       data: this.state,
-      success: data => console.log(data),
-      error: data => console.log(data)
+      success: () => {
+        this.setState({success: 'Truck Created!'});
+        setTimeout(() => this.setState({success: ''}), 2000);
+      },
+      error: () => this.setState({error: 'Try Again'})
     });
+    this.setState( { name: '' });
   }
 
   render() {
@@ -47,9 +53,10 @@ class AddTruck extends React.Component {
                    placeholder='Enter a Truck Name'
                    className='search-bar'
                    onChange={this.updateName.bind(this)}>
-
             </input>
             <p>{this.state.name}</p>
+            <p>{this.state.success}</p>
+            <p>{this.state.error}</p>
           </div>
         </form>
       </div>

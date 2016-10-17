@@ -11,7 +11,7 @@ function parseData(data, ...dataLabels) {
 
 //capitalize words
 function capitalize(string) {
-  return string.split(' ').map(word => {
+  return string.split('-').map(word => {
     var lowerCase = word.toLowerCase();
     return lowerCase[0].toUpperCase() + lowerCase.slice(1, lowerCase.length);
   }).join(' ');

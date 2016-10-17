@@ -28,7 +28,7 @@ function addTruck(req, res) {
 }
 
 function updateTruck(req, res) {
-  var name = helpers.capitalize(req.params.truck.replace('-', ' '));
+  var name = helpers.capitalize(req.params.truck);
   db.Truck.findOne({
     name
   }, function(err, truck) {
@@ -48,7 +48,7 @@ function updateTruck(req, res) {
 }
 
 function deleteTruck(req, res) {
-  var name = helpers.capitalize(req.params.truck.replace('-', ' '));
+  var name = helpers.capitalize(req.params.truck);
   db.Truck.findOne({
     name
   }, function(err, truck) {
