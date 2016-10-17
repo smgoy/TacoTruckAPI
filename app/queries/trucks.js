@@ -7,7 +7,8 @@ function getAllTrucks(req, res) {
     if (err) {
       response = {"error" : true, "message" : "Error fetching data"};
     } else {
-      response = { data: helpers.parseData(data, 'name')};
+      response = helpers.parseData(data, 'name');
+      response = response.map(truck => truck.name);
     }
     res.json(response);
   });
