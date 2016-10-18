@@ -1,22 +1,16 @@
 import React from 'react';
 import $ from 'JQuery';
 
-class ShowTrucks extends React.Component {
+class TrucksButton extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       data: []
     };
-    this.showTrucks = this.showTrucks.bind(this);
   }
 
-  showTrucks() {
-    $.ajax({
-      url: 'api/trucks',
-      method: 'GET',
-      dataType: 'json',
-      success: data => this.setState({data})
-    });
+  componentDidMount() {
+    this.props.requestAllTrucks();
   }
 
   displayData() {
@@ -42,4 +36,4 @@ class ShowTrucks extends React.Component {
   }
 }
 
-export default ShowTrucks;
+export default TrucksButton;
