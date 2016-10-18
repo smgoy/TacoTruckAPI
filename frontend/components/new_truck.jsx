@@ -41,11 +41,6 @@ class AddTruck extends React.Component {
   render() {
     return (
       <div>
-        <p className='description-text'>
-          That's pretty sweet, looks like we already have some
-          trucks in out database. Use the form below to input a new
-          truck name.
-        </p>
         <form onSubmit={this.addTruck.bind(this)}>
           <div className='inline-text'>
             <input type='text'
