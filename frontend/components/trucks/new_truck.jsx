@@ -1,18 +1,12 @@
 import React from 'react';
-import $ from 'JQuery';
+import InputBar from './input_bar';
 
-class AddTruck extends React.Component {
+class NewTruckForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: '',
-      success: '',
-      error: '' //need to add custom validation
+      name: ''
     };
-  }
-
-  updateName(e) {
-    this.setState({name: this.capitalize(e.currentTarget.value)});
   }
 
   capitalize(text) {
@@ -23,45 +17,27 @@ class AddTruck extends React.Component {
     }).join(' ');
   }
 
-  addTruck(e) {
-    e.preventDefault();
-    $.ajax({
-      url: 'api/trucks',
-      method: 'POST',
-      data: this.state,
-      success: () => {
-        this.setState({success: 'Truck Created!'});
-        setTimeout(() => this.setState({success: ''}), 2000);
-      },
-      error: () => this.setState({error: 'Try Again'})
-    });
-    this.setState( { name: '' });
+  updateName(e) {
+    this.setState({name: this.capitalize(e.currentTarget.value)});
   }
 
-  render() {
+  addTruck(e) {
+    e.preventDefault();
+    this.props.addTruck(this.state.name);
+  }
+
+  render () {
+    const props = {
+      updateName: this.updateName.bind(this),
+      name: this.state.name
+    };
+
     return (
-      <div>
-        <p className='description-text'>
-          That's pretty sweet, looks like we already have some
-          trucks in our database. Use the form below to input a new
-          truck name.
-        </p>
-        <form onSubmit={this.addTruck.bind(this)}>
-          <div className='inline-text'>
-            <input type='text'
-                   name='truck'
-                   placeholder='Enter a Truck Name'
-                   className='search-bar'
-                   onChange={this.updateName.bind(this)}>
-            </input>
-            <p>{this.state.name}</p>
-            <p>{this.state.success}</p>
-            <p>{this.state.error}</p>
-          </div>
-        </form>
-      </div>
+      <form onSubmit={this.addTruck.bind(this)}>
+        <InputBar {...props} />
+      </form>
     );
   }
 }
 
-export default AddTruck;
+export default NewTruckForm;

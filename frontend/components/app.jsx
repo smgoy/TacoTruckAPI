@@ -1,10 +1,17 @@
 import React from 'react';
 import TrucksButton from './trucks/all_trucks_container';
-import NewTruck from './trucks/new_truck';
+import NewTruckForm from './trucks/new_truck_container';
 import UpdateDeleteTruck from './trucks/update_delete_truck';
 
 const App = () => (
-  <TrucksButton />
+  <div>
+    <TrucksButton />
+    <p className='description-text'>
+      Now, use the form below to input a new
+      truck name.
+    </p>
+    <NewTruckForm />
+  </div>
 );
 
 export default App;

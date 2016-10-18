@@ -7,9 +7,15 @@ const DisplayTrucks = ({trucks, display}) => {
   ));
 
   return (
-    <ul className={`display-trucks ${display}`}>
-      {displayTrucks}
-    </ul>
+    <div>
+      <ul className={`display-trucks ${display}`}>
+        {displayTrucks}
+      </ul>
+      <p className={`description-text ${display}`}>
+        That's pretty sweet, looks like we already have some
+        trucks in our database.
+      </p>
+    </div>
   );
 };
 

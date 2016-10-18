@@ -8,3 +8,14 @@ export const requestAllTrucks = (success) => {
     success
   });
 };
+
+export const addTruck = (success, error, data) => {
+  $.ajax({
+    url: 'api/trucks',
+    method: 'POST',
+    dataType: 'json',
+    data,
+    success,
+    error
+  });
+};

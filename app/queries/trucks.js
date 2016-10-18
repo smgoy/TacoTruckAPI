@@ -15,13 +15,14 @@ function getAllTrucks(req, res) {
 
 function addTruck(req, res) {
   var truck = new db.Truck();
+  console.log(req.body.name);
   truck.name = req.body.name;
 
   truck.save(function(err) {
     if (err) {
       res.json(err);
     } else {
-      res.json({ message: `${truck.name} created!` });
+      res.json({name: truck.name, id: truck.id});
     }
   });
 }
