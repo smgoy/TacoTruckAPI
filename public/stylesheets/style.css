@@ -57,6 +57,10 @@ body {
 	border-radius: 5px;
 }
 
+.hide-trucks {
+	display: none;
+}
+
 .trucks {
 	padding: 10px 7px;
 	font-weight: 600;

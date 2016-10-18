@@ -1,11 +1,12 @@
 import React from 'react';
-import $ from 'JQuery';
+import DisplayTrucks from './display_trucks';
 
 class TrucksButton extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: []
+      text: 'Show all Trucks',
+      display: 'hide-trucks'
     };
   }
 
@@ -13,10 +14,17 @@ class TrucksButton extends React.Component {
     this.props.requestAllTrucks();
   }
 
-  displayData() {
-    return this.state.data.map(trucks => (
-      <li key={trucks.name} className='trucks'>{trucks.name}</li>
-    ));
+  toggleButton() {
+    if (this.state.text === 'Show all Trucks')
+      this.setState({
+        text: 'Hide Trucks',
+        display: ''
+      });
+    else
+      this.setState({
+        text: 'Show all Trucks',
+        display: 'hide-trucks'
+      });
   }
 
   render() {
@@ -24,13 +32,12 @@ class TrucksButton extends React.Component {
       <div>
         <div className='center-button'>
           <button className='show-trucks-button'
-                  onClick={this.showTrucks}>
-            Show all trucks
+                  onClick={this.toggleButton.bind(this)}>
+            {this.state.text}
           </button>
         </div>
-        <ul className='display-trucks'>
-          {this.displayData()}
-        </ul>
+        <DisplayTrucks trucks={this.props.trucks}
+                       display={this.state.display} />
       </div>
     );
   }
