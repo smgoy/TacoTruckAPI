@@ -21,6 +21,6 @@ router.delete('/api/tacos/:taco', tacos.deleteTaco);
 router.get('/api/trucks', trucks.getAllTrucks);
 router.post('/api/trucks', trucks.addTruck);
 router.put('/api/trucks/:truck', trucks.updateTruck);
-router.delete('/api/trucks/:truck', trucks.deleteTruck);
+router.delete('/api/trucks/:id', trucks.deleteTruck);
 
 module.exports = router;

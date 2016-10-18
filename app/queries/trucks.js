@@ -7,8 +7,7 @@ function getAllTrucks(req, res) {
     if (err) {
       response = {"error" : true, "message" : "Error fetching data"};
     } else {
-      response = helpers.parseData(data, 'name');
-      response = response.map(truck => truck.name);
+      response = helpers.parseData(data, 'name', 'id');
     }
     res.json(response);
   });
@@ -48,10 +47,8 @@ function updateTruck(req, res) {
 }
 
 function deleteTruck(req, res) {
-  var name = helpers.capitalize(req.params.truck);
-  db.Truck.findOne({
-    name
-  }, function(err, truck) {
+  var id = req.params.id;
+  db.Truck.findById(id, function(err, truck) {
     if (err) {
       res.json(err);
     } else {

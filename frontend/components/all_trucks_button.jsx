@@ -20,8 +20,8 @@ class ShowTrucks extends React.Component {
   }
 
   displayData() {
-    return this.state.data.map(truckName => (
-      <li key={truckName} className='trucks'>{truckName}</li>
+    return this.state.data.map(trucks => (
+      <li key={trucks.name} className='trucks'>{trucks.name}</li>
     ));
   }
 
