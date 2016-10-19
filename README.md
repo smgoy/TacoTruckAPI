@@ -1,99 +1,57 @@
 #Taco Truck API
 
-Welcome to my Taco Truck API. This API was a small project to help familiarize myself with creating my very own API that uses NodeJS for the backend. Additionally, this project uses ExpressJS to help create a server, PostgreSQL for the database and pg-promise.js to help manage the database connection.
+Welcome to my Taco Truck API. This RESTful API serves a simple CRUD application to keep track of taco trucks and the different tacos they sell. Fun! The purpose of this applications was to familiarize myself with creating a NodeJS backend and a noSQL database.
 
 This README will be used to help myself walk through what I have learned.
 
-##Setting up the Database
+##Technologies
 
-For this project I have setup a tacotrucks database with 4 tables.
+- NodeJS
+- Express
+- MongoDB
+- Mongoose
+- React
+- Redux
 
-###trucks
-| column name   | data type     | details     |
-| ------------- | ------------- | --------    |
-| ID            | integer       | not null, primary key |
-| name          | string        | not null    |
+##noSQL
 
-###ingredients
-| column name   | data type     | details     |
-| ------------- | ------------- | --------    |
-| ID            | integer       | not null, primary key |
-| name          | string        | not null, unique    |
+I am familiar with SQL—a database containing tables, rows and columns—but I wanted to explore the world of noSQL—a database with collections and documents.
 
-###tacos
-| column name   | data type     | details     |
-| ------------- | ------------- | --------    |
-| ID            | integer       | not null, primary key |
-| name          | string        | not null, unique with truck_id    |
-| truck_id      | integer       | not null, unique with name    |
+noSQL is very similar to JSON object with keys and values. Lets look at a couple documents from my Truck collection:
 
-###taco_ingredients
-| column name   | data type     | details     |
-| ------------- | ------------- | --------    |
-| ID            | integer       | not null, primary key |
-| ingredient_id  | integer       | not null    |
-| taco_id      | integer       | not null    |
-
-In this taco truck world, there are a few rules.
-- Each taco must be unique
-- Tacos are patented, so the trucks cannot sell the same taco
-
-To help reinforce these rules I have put some restrictions on the data going into the database. I am also going to explore writing custom validations so that the user of this API can know that they need to follow these rules when sending `POST` requests.
-
-##Starting out with a simple DB query
-
-Let's start out with a simple query and select all of the rows from the tacos table.
-
-In `routes/index.js` we want to make sure we have access to out `queries.js` file
 ```javascript
-var db = require('../queries');
+  [
+    {
+      id: 1
+      name: 'Taco Bamba'
+    },
+
+    {
+      id: 2
+      name: 'District Taco'
+    }
+  ]
 ```
-Then we need to add the route
+
+One thing I found pretty cool about a noSQL database was the flexibility of datatypes that could be stored as values. What do I mean by this? Let's look at a document from my Tacos collection:
+
 ```javascript
-router.get('/api/tacos', db.getAllTacos);
-```
-Finally in `queries.js` we need to write the SQL to query the database and send back a 200, all okay, to display the data in a JSON format. For this step we need to write a function that uses pg-promise.js so that all of our SQL queries are returned as promises.
-
-Here's the setup:
-```javascript
-var promise = require('bluebird');
-
-var options = {
-  promiseLib: promise
-};
-
-var pgp = require('pg-promise')(options);
-var connectionString = 'postgres://localhost:5432/tacotrucks';
-var db = pgp(connectionString);
+  [
+    {
+      name: 'Arabe',
+      truck: 'Taco Bamba',
+      ingredients: [
+        'Grilled Chicken',
+        'Ancho Mayo',
+        'Cucumber Mayo',
+        'Chipotle Yogart'
+      ]
+    }
+  ]
 ```
 
-Here's the `requestAllTacos` function:
-```javascript
-function getAllTacos (req, res, next) {
-  db.any('select * from tacos')
-    .then(function (tacos) {
-      res.status(200)
-        .json({
-          status: 'success',
-          data: tacos,
-          message: 'all the tacos'
-        });
-    })
-    .catch(function (err) {
-      return next(err);
-    });
-}
-```
+Arrays are valid values! This is pretty cool and simplifies SQL's dreaded joins. However, it's pretty easy to think of a situation where an array within a document could get infinitely large or be unnecessarily repeating data. But without joins how can we refer to other documents?
 
-Boot up the server `npm start` and make a `GET` request to `localhost:3000/api/tacos` and you will see our JSON object with all of our tacos (in this case only two) in the data key.
-```
-{
-  "status":"success",
-  "data":[
-          {"id":1,"name":"Arabe","truck_id":1},
-          {"id":2,"name":"Spicy Shroom","truck_id":1}
-         ],
-  "message":"Retrieved ALL tacos"
-}
-```
-But what if I want to display the name of the truck instead of the truck ID or what if I wanted to show all if the ingredients in each of the tacos? We're going to need some `JOIN`s for that.
+##Look ma, no joins
+
+Just as arrays are valid inputs, documents are too—known as inner documents.
