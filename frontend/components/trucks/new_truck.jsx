@@ -23,7 +23,7 @@ class NewTruckForm extends React.Component {
 
   addTruck(e) {
     e.preventDefault();
-    this.props.addTruck(this.state.name);
+    this.props.addTruck(this.state);
   }
 
   render () {
