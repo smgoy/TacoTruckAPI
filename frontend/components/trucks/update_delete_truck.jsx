@@ -3,7 +3,7 @@ import $ from 'JQuery';
 import InputBar from './input_bar';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
-import TruckButton from './all_trucks_button';
+import SeeTacos from '../tacos/see_tacos_button';
 
 class UpdateDeleteTruck extends React.Component {
   constructor(props) {
@@ -47,9 +47,11 @@ class UpdateDeleteTruck extends React.Component {
   }
 
   selectTruck(event, index, value) {
+    let showInputBar = true;
+    if (value === null) showInputBar = false;
     this.setState({
       value,
-      showInputBar: true,
+      showInputBar,
       truckID: value
     });
   }
@@ -65,6 +67,21 @@ class UpdateDeleteTruck extends React.Component {
 
     if (this.state.showInputBar) {
       return <InputBar {...props} />;
+    } else {
+      return null;
+    }
+  }
+
+  seeTruckOptions() {
+    if (this.state.showInputBar) {
+      return (
+        <div>
+          <p className='description-text bottom-margin'>
+            Update the truck's name or checkout it's tacos.
+          </p>
+          <SeeTacos />
+        </div>
+      );
     } else {
       return null;
     }
@@ -86,17 +103,20 @@ class UpdateDeleteTruck extends React.Component {
 
   render() {
     return(
-      <form onSubmit={this.handleSubmit.bind(this)}>
-        <SelectField value={this.state.value}
-                     floatingLabelText="Select a Truck"
-                     onChange={this.selectTruck.bind(this)}
-                     maxHeight={200}
-                     style={{width: '100%'}}>
-          <MenuItem value={null} primaryText="" />
-          {this.displayOptions()}
-      </SelectField>
-        {this.inputBar()}
-      </form>
+      <div>
+        <form onSubmit={this.handleSubmit.bind(this)}>
+          <SelectField value={this.state.value}
+                       floatingLabelText="Select a Truck"
+                       onChange={this.selectTruck.bind(this)}
+                       maxHeight={200}
+                       style={{width: '100%'}}>
+            <MenuItem value={null} primaryText="" />
+            {this.displayOptions()}
+        </SelectField>
+          {this.inputBar()}
+        </form>
+        {this.seeTruckOptions()}
+      </div>
     );
   }
 }

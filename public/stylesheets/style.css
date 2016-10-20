@@ -109,3 +109,11 @@ form {
 	width: 33%;
 	margin: 0 auto;
 }
+
+.bottom-margin {
+	margin-bottom: 25px;
+}
+
+.hide-truck-options {
+	display: none;
+}

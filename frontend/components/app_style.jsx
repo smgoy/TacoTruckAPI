@@ -2,6 +2,7 @@ import React from 'react';
 import TrucksButton from './trucks/all_trucks_container';
 import NewTruckForm from './trucks/new_truck_container';
 import UpdateDeleteTruck from './trucks/update_truck_container';
+import SeeTacos from './tacos/see_tacos_button';
 
 const AppStyle = () => (
   <div>
