@@ -15,11 +15,12 @@ class NewTruckForm extends React.Component {
     setTimeout(() => this.setState({message: ''}), 2000);
   }
 
-  capitalize(text) {
-    if (text === '') return '';
-    return text.split(' ').map(word => {
+  capitalize(string) {
+    if (string === '') return '';
+    return string.split(' ').map(word => {
       if (word[0] === undefined) return '';
-      return word[0].toUpperCase() + word.slice(1, word.length);
+      var lowerCase = word.toLowerCase();
+      return lowerCase[0].toUpperCase() + lowerCase.slice(1, lowerCase.length);
     }).join(' ');
   }
 
@@ -30,6 +31,7 @@ class NewTruckForm extends React.Component {
   addTruck(e) {
     e.preventDefault();
     this.props.addTruck(this.state);
+    this.setState({name: ''});
   }
 
   render () {
@@ -37,7 +39,8 @@ class NewTruckForm extends React.Component {
       updateName: this.updateName.bind(this),
       name: this.state.name,
       message: this.state.message,
-      placeholder: 'Enter a Truck Name'
+      placeholder: 'Enter a Truck Name',
+      hint: ''
     };
 
     return (

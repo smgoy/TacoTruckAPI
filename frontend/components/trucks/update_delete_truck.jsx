@@ -1,11 +1,16 @@
 import React from 'react';
 import $ from 'JQuery';
 import InputBar from './input_bar';
+import SelectField from 'material-ui/SelectField';
+import MenuItem from 'material-ui/MenuItem';
+import TruckButton from './all_trucks_button';
 
 class UpdateDeleteTruck extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      value: null,
+      data: [],
       showInputBar: false,
       name: '',
       message: '',
@@ -17,23 +22,35 @@ class UpdateDeleteTruck extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    this.setState({data: nextProps.trucks.trucksData.map(truck=>truck.name)});
     this.setState({message: nextProps.trucks.message});
     setTimeout(() => this.setState({message: ''}), 2000);
   }
 
+  capitalize(string) {
+    if (string === '') return '';
+    return string.split(' ').map(word => {
+      if (word[0] === undefined) return '';
+      var lowerCase = word.toLowerCase();
+      return lowerCase[0].toUpperCase() + lowerCase.slice(1, lowerCase.length);
+    }).join(' ');
+  }
+
+
   displayOptions() {
     return this.props.trucks.trucksData.map(trucks => {
-      return <option key={trucks.id}
-                     data-id={trucks.id}>
-              {trucks.name}
-            </option>;
+      return <MenuItem key={trucks.id}
+                       value={trucks.id}
+                       primaryText={trucks.name}>
+            </MenuItem>;
     });
   }
 
-  selectTruck(e) {
+  selectTruck(event, index, value) {
     this.setState({
+      value,
       showInputBar: true,
-      truckID: $(e.currentTarget).find(':selected').data('id')
+      truckID: value
     });
   }
 
@@ -42,7 +59,8 @@ class UpdateDeleteTruck extends React.Component {
       updateName: this.updateName.bind(this),
       name: this.state.name,
       message: this.state.message,
-      placeholder: 'Enter a Truck Name'
+      placeholder: 'Update Truck',
+      hint: "Type \'remove\' to delete truck"
     };
 
     if (this.state.showInputBar) {
@@ -52,40 +70,32 @@ class UpdateDeleteTruck extends React.Component {
     }
   }
 
-  inputInstructions() {
-    if (this.state.showInputBar) {
-      return (<p className='update-instructions'>
-                Type 'remove' to delete truck
-              </p>);
-    } else {
-      return null;
-    }
-  }
-
   updateName(e) {
-    this.setState({name: e.currentTarget.value});
+    this.setState({name: this.capitalize(e.currentTarget.value)});
   }
 
   handleSubmit(e) {
     e.preventDefault();
-    if (this.state.name === 'remove') {
+    if (this.state.name === 'Remove') {
       this.props.deleteTruck(this.state.truckID);
     } else {
       this.props.updateTruck(this.state.truckID, {name: this.state.name});
     }
+    this.setState({name: ''});
   }
 
   render() {
     return(
       <form onSubmit={this.handleSubmit.bind(this)}>
-        <select defaultValue=''
-                className='truck-options'
-                onChange={this.selectTruck.bind(this)}>
-          <option value='' disabled>Select a Truck</option>
+        <SelectField value={this.state.value}
+                     floatingLabelText="Select a Truck"
+                     onChange={this.selectTruck.bind(this)}
+                     maxHeight={200}
+                     style={{width: '100%'}}>
+          <MenuItem value={null} primaryText="" />
           {this.displayOptions()}
-        </select>
+      </SelectField>
         {this.inputBar()}
-        {this.inputInstructions()}
       </form>
     );
   }

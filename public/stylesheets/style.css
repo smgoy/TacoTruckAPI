@@ -68,11 +68,13 @@ body {
 
 .description-text {
 	margin: 25px 0;
+	margin-bottom: 0;
+	text-align: center;
 }
 
 .search-bar {
 	border-radius: 5px;
-	width: 33%;
+	width: 100%;
 	font-size: 16px;
 	border: 1px solid #626e60;
 	padding: 5px 3px;
@@ -91,15 +93,19 @@ body {
 }
 
 .truck-options {
-	width: 33%;
+	width: 100%;
 	font-size: 16px;
 	border: 1px solid #626e60;
 	border-radius: 5px;
 	height: 31px;
 	margin-right: 20px;
-	margin-bottom: 10px;
 }
 
 .update-instructions {
 	font-size: 12px;
+}
+
+form {
+	width: 33%;
+	margin: 0 auto;
 }

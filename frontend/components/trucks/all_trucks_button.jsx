@@ -1,5 +1,6 @@
 import React from 'react';
 import DisplayTrucks from './display_trucks';
+import RaisedButton from 'material-ui/RaisedButton';
 
 class TrucksButton extends React.Component {
   constructor(props) {
@@ -31,10 +32,10 @@ class TrucksButton extends React.Component {
     return (
       <div>
         <div className='center-button'>
-          <button className='show-trucks-button'
-                  onClick={this.toggleButton.bind(this)}>
-            {this.state.text}
-          </button>
+          <RaisedButton label={this.state.text}
+                        onClick={this.toggleButton.bind(this)}
+                        backgroundColor='#626e60'
+                        style={{width: '100%'}} />
         </div>
         <DisplayTrucks trucks={this.props.trucks}
                        display={this.state.display} />
