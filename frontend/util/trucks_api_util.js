@@ -28,3 +28,14 @@ export const deleteTruck = (success, id) => {
     success,
   });
 };
+
+export const updateTruck = (success, error, id, data) => {
+  $.ajax({
+    url: `api/trucks/${id}`,
+    method: 'PUT',
+    dataType: 'json',
+    data,
+    success,
+    error
+  });
+};

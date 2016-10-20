@@ -28,19 +28,18 @@ function addTruck(req, res) {
 }
 
 function updateTruck(req, res) {
-  var name = helpers.capitalize(req.params.truck);
-  db.Truck.findOne({
-    name
-  }, function(err, truck) {
+  var id = req.params.id;
+  db.Truck.findById( id, function(err, truck) {
     if (err) {
       res.json(err);
     } else {
-      truck.name = req.query.name;
+      truck.name = req.body.name;
       truck.save(function(error) {
         if(error) {
-          res.json(err);
+          res.status(422);
+          res.json(error.errors.name.message);
         } else {
-          res.json({message: `Truck updated to ${truck.name}`});
+          res.json({name: truck.name, id: truck.id});
         }
       });
     }
@@ -57,7 +56,7 @@ function deleteTruck(req, res) {
         if(error) {
           res.json(error);
         } else {
-          res.json({message: `${truck.name} deleted`});
+          res.json({name: truck.name, id: truck.id});
         }
       });
     }

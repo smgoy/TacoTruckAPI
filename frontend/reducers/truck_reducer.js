@@ -11,8 +11,17 @@ export const TruckReducer = (state = initialState, action) => {
       return Object.assign({}, state, {trucksData: action.trucks});
     }
     case truckConstants.RECEIVE_TRUCK: {
-      const trucks = state.trucksData.slice();
-      trucks.push(action.truck);
+      let trucks = state.trucksData.slice();
+      let update = false;
+      trucks = trucks.map(truck => {
+        if (truck.id === action.truck.id) {
+          update = true;
+          truck.name = action.truck.name;
+          return truck;
+        }
+        return truck;
+      });
+      if (!update) trucks.push(action.truck);
       const newState = {trucksData: trucks, message: 'Success!'};
       return Object.assign({}, newState);
     }

@@ -17,7 +17,7 @@ class UpdateDeleteTruck extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    this.setState({message: nextProps.message});
+    this.setState({message: nextProps.trucks.message});
     setTimeout(() => this.setState({message: ''}), 2000);
   }
 
@@ -71,7 +71,7 @@ class UpdateDeleteTruck extends React.Component {
     if (this.state.name === 'remove') {
       this.props.deleteTruck(this.state.truckID);
     } else {
-      //this.updateTruck();
+      this.props.updateTruck(this.state.truckID, {name: this.state.name});
     }
   }
 
