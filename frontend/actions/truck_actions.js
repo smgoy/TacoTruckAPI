@@ -3,7 +3,9 @@ export const truckConstants = {
   RECEIVE_ALL_TRUCKS: "RECEIVE_ALL_TRUCKS",
   ADD_TRUCK: "ADD_TRUCK",
   RECEIVE_TRUCK: "RECEIVE_TRUCK",
-  RECEIVE_ERRORS: "RECEIVE_ERRORS"
+  RECEIVE_ERRORS: "RECEIVE_ERRORS",
+  DELETE_TRUCK: "DELETE_TRUCK",
+  REMOVE_TRUCK: "REMOVE_TRUCK"
 };
 
 export const requestAllTrucks = () => ({
@@ -28,4 +30,14 @@ export const receiveTruck = truck => ({
 export const receiveErrors = errors => ({
   type: truckConstants.RECEIVE_ERRORS,
   errors
+});
+
+export const deleteTruck = id => ({
+  type: truckConstants.DELETE_TRUCK,
+  id
+});
+
+export const removeTruck = truck => ({
+  type: truckConstants.REMOVE_TRUCK,
+  truck
 });

@@ -19,3 +19,12 @@ export const addTruck = (success, error, data) => {
     error
   });
 };
+
+export const deleteTruck = (success, id) => {
+  $.ajax({
+    url: `api/trucks/${id}`,
+    method: 'DELETE',
+    dataType: 'json',
+    success,
+  });
+};

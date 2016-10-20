@@ -36,7 +36,8 @@ class NewTruckForm extends React.Component {
     const props = {
       updateName: this.updateName.bind(this),
       name: this.state.name,
-      message: this.state.message
+      message: this.state.message,
+      placeholder: 'Enter a Truck Name'
     };
 
     return (

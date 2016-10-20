@@ -6,11 +6,10 @@ class InputBar extends React.Component {
       <div className='inline-text'>
         <input type='text'
                name='truck'
-               placeholder='Enter a Truck Name'
+               placeholder={this.props.placeholder}
                className='search-bar'
                onChange={this.props.updateName}>
         </input>
-        <p>{this.props.name}</p>
         <p>{this.props.message}</p>
       </div>
     );

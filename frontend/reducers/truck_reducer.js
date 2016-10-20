@@ -7,15 +7,25 @@ const initialState = {
 
 export const TruckReducer = (state = initialState, action) => {
   switch (action.type) {
-    case truckConstants.RECEIVE_ALL_TRUCKS:
+    case truckConstants.RECEIVE_ALL_TRUCKS: {
       return Object.assign({}, state, {trucksData: action.trucks});
-    case truckConstants.RECEIVE_TRUCK:
+    }
+    case truckConstants.RECEIVE_TRUCK: {
       const trucks = state.trucksData.slice();
       trucks.push(action.truck);
       const newState = {trucksData: trucks, message: 'Success!'};
       return Object.assign({}, newState);
-    case truckConstants.RECEIVE_ERRORS:
+    }
+    case truckConstants.RECEIVE_ERRORS: {
       return Object.assign({}, state, {message: action.errors.responseText});
+    }
+    case truckConstants.REMOVE_TRUCK: {
+      const trucks = state.trucksData.slice();
+      const idx = trucks.indexOf(action.truck);
+      trucks.splice(idx, 1);
+      const newState = {trucksData: trucks, message: 'Success!'};
+      return Object.assign({}, newState);
+    }
     default:
       return state;
   }
