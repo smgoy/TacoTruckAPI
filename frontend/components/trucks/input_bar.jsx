@@ -1,15 +1,6 @@
 import React from 'react';
 
 class InputBar extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      name: '',
-      success: '',
-      error: '' //need to add custom validation
-    };
-  }
-
   render() {
     return (
       <div className='inline-text'>
@@ -20,8 +11,7 @@ class InputBar extends React.Component {
                onChange={this.props.updateName}>
         </input>
         <p>{this.props.name}</p>
-        <p>{this.state.success}</p>
-        <p>{this.state.error}</p>
+        <p>{this.props.message}</p>
       </div>
     );
   }

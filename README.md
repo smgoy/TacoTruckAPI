@@ -6,10 +6,13 @@ This README will be used to help myself walk through what I have learned.
 
 ##Technologies
 
+Backend:
 - NodeJS
 - Express
 - MongoDB
 - Mongoose
+
+Frontend:
 - React
 - Redux
 

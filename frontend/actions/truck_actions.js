@@ -2,7 +2,8 @@ export const truckConstants = {
   REQUEST_ALL_TRUCKS: "REQUEST_ALL_TRUCKS",
   RECEIVE_ALL_TRUCKS: "RECEIVE_ALL_TRUCKS",
   ADD_TRUCK: "ADD_TRUCK",
-  RECEIVE_TRUCK: "RECEIVE_TRUCK"
+  RECEIVE_TRUCK: "RECEIVE_TRUCK",
+  RECEIVE_ERRORS: "RECEIVE_ERRORS"
 };
 
 export const requestAllTrucks = () => ({
@@ -22,4 +23,9 @@ export const addTruck = truck => ({
 export const receiveTruck = truck => ({
   type: truckConstants.RECEIVE_TRUCK,
   truck
+});
+
+export const receiveErrors = errors => ({
+  type: truckConstants.RECEIVE_ERRORS,
+  errors
 });

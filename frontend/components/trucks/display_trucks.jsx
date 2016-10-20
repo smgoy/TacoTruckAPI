@@ -2,7 +2,7 @@ import React from 'react';
 
 const DisplayTrucks = ({trucks, display}) => {
 
-  const displayTrucks = trucks.map(truck => (
+  const displayTrucks = trucks.trucksData.map(truck => (
     <li key={truck.id} className='trucks'>{truck.name}</li>
   ));
 

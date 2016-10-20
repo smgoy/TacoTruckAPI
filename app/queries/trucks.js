@@ -20,7 +20,7 @@ function addTruck(req, res) {
   truck.save(function(err) {
     if (err) {
       res.status(422);
-      res.json(err);
+      res.json(err.errors.name.message);
     } else {
       res.json({name: truck.name, id: truck.id});
     }

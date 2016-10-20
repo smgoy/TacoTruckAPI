@@ -5,8 +5,14 @@ class NewTruckForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: ''
+      name: '',
+      message: ''
     };
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.setState({message: nextProps.message});
+    setTimeout(() => this.setState({message: ''}), 2000);
   }
 
   capitalize(text) {
@@ -29,7 +35,8 @@ class NewTruckForm extends React.Component {
   render () {
     const props = {
       updateName: this.updateName.bind(this),
-      name: this.state.name
+      name: this.state.name,
+      message: this.state.message
     };
 
     return (
