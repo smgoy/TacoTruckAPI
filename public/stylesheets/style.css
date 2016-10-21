@@ -121,6 +121,7 @@ form {
 	margin: 25px;
 	background-color: #af473c;
 	border-radius: 5px;
+	margin-bottom: 0;
 }
 
 .tacos {
@@ -134,4 +135,16 @@ form {
 
 .fa {
 	margin-left: 15px;
+}
+
+.add-taco {
+	cursor: pointer;
+	font-size: 14px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.new-taco {
+	width: 66%;
+	margin: 0 auto;
 }

@@ -1,14 +1,30 @@
 import React from 'react';
 import InlineEdit from 'react-edit-inline';
+import TextField from 'material-ui/TextField';
 
 class DisplayTacos extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      inputField: null
+    };
   }
 
+  addInputField() {
+    const textField = (
+      <form className='new-taco'>
+        <TextField hintText="Format (Taco Name: Ingredient One, Ingredient Two, ...)"
+                   floatingLabelText="Add a New Taco"
+                   style={{width: '100%'}}/>
+      </form>
+    );
+    this.setState({inputField: textField});
+  }
 
   render() {
     const {tacos, display} = this.props;
+
+    if (display === 'hide-trucks') this.state.inputField = null;
 
     const displayTacos = tacos.map(taco => {
       let ingredients = '';
@@ -31,11 +47,15 @@ class DisplayTacos extends React.Component {
     });
 
     return (
-      <div>
-        <ul className={`display-tacos ${display}`}>
+      <div className={display}>
+        <ul className='display-tacos'>
           {displayTacos}
-          <li className='tacos'>Add Taco</li>
+          <a className='add-taco'
+            onClick={this.addInputField.bind(this)}>
+            - Add Taco -
+          </a>
         </ul>
+        {this.state.inputField}
       </div>
     );
   }
