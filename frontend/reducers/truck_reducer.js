@@ -28,6 +28,9 @@ export const TruckReducer = (state = initialState, action) => {
     case truckConstants.RECEIVE_ERRORS: {
       return Object.assign({}, state, {message: action.errors.responseText});
     }
+    case truckConstants.CLEAR_ERRORS: {
+      return Object.assign({}, state, {message: null});
+    }
     case truckConstants.REMOVE_TRUCK: {
       const trucks = state.trucksData.slice();
       const idx = trucks.indexOf(action.truck);
