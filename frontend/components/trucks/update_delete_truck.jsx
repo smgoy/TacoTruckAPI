@@ -3,7 +3,7 @@ import $ from 'JQuery';
 import InputBar from './input_bar_container';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
-import SeeTacos from '../tacos/see_tacos_button';
+import SeeTacos from '../tacos/see_tacos_container';
 
 class UpdateDeleteTruck extends React.Component {
   constructor(props) {

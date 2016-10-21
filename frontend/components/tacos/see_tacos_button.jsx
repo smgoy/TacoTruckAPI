@@ -1,5 +1,6 @@
 import React from 'react';
 import RaisedButton from 'material-ui/RaisedButton';
+import DisplayTacos from './display_tacos';
 
 class SeeTacos extends React.Component {
   constructor(props) {
@@ -30,9 +31,10 @@ class SeeTacos extends React.Component {
           <RaisedButton label={this.state.text}
                         onClick={this.toggleButton.bind(this)}
                         backgroundColor='#626e60'
-                        style={{width: '100%'}}
-                        className='hide-truck-options' />
+                        style={{width: '100%'}} />
         </div>
+        <DisplayTacos tacos={this.props.tacos}
+                       display={this.state.display} />
       </div>
     );
   }

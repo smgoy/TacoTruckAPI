@@ -7,26 +7,9 @@ function getAllTacos(req, res){
       if (err) {
         res.json({"error" : true, "message" : "Error fetching data"});
       } else {
-        res.json(helpers.parseData(data, 'name', 'ingredients'));
+        res.json(helpers.parseData(data, 'name', 'ingredients', 'id'));
       }
     });
-  });
-}
-
-function getTacosByTruck(req, res) {
-  var response = {};
-  var truck = helpers.capitalize(req.params.truck.replace('-', ' '));
-  db.Taco.find({
-    truck
-  }, function(err, data){
-    if (err) {
-      response = {"error" : true, "message" : "Error fetching data"};
-    } else {
-      response = {
-        data: helpers.parseData(data, 'name', 'ingredients')
-      };
-    }
-    res.json(response);
   });
 }
 
@@ -78,7 +61,6 @@ function deleteTaco(req, res) {
 
 module.exports = {
   getAllTacos,
-  getTacosByTruck,
   addTaco,
   updateTaco,
   deleteTaco
