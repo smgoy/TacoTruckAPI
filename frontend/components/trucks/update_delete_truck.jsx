@@ -1,6 +1,6 @@
 import React from 'react';
 import $ from 'JQuery';
-import InputBar from './input_bar';
+import InputBar from './input_bar_container';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 import SeeTacos from '../tacos/see_tacos_button';
@@ -13,7 +13,7 @@ class UpdateDeleteTruck extends React.Component {
       data: [],
       showInputBar: false,
       name: '',
-      message: '',
+      message: null,
       truckID: null
     };
     this.displayOptions = this.displayOptions.bind(this);
@@ -22,8 +22,10 @@ class UpdateDeleteTruck extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    this.setState({data: nextProps.trucks.trucksData.map(truck=>truck.name)});
-    this.setState({message: nextProps.trucks.message});
+    this.setState({
+      data: nextProps.trucks.trucksData.map(truck=>truck.name),
+      message: nextProps.trucks.message
+    });
     setTimeout(() => this.setState({message: ''}), 2000);
   }
 
@@ -47,6 +49,7 @@ class UpdateDeleteTruck extends React.Component {
   }
 
   selectTruck(event, index, value) {
+    if (value) this.props.requestTacos(value);
     let showInputBar = true;
     if (value === null) showInputBar = false;
     this.setState({
@@ -95,6 +98,11 @@ class UpdateDeleteTruck extends React.Component {
     e.preventDefault();
     if (this.state.name === 'Remove') {
       this.props.deleteTruck(this.state.truckID);
+      this.setState({
+        value: null,
+        showInputBar: false,
+        truckID: null
+      });
     } else {
       this.props.updateTruck(this.state.truckID, {name: this.state.name});
     }

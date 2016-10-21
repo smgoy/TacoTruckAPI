@@ -1,12 +1,12 @@
 import React from 'react';
-import InputBar from './input_bar';
+import InputBar from './input_bar_container';
 
 class NewTruckForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       name: '',
-      message: ''
+      message: null
     };
   }
 

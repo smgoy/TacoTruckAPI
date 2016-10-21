@@ -11,7 +11,7 @@ router.get('/', function(req, res, next) {
 });
 
 //taco API routes
-router.get('/api/tacos', tacos.getAllTacos);
+router.get('/api/tacos/:truckID', tacos.getAllTacos);
 router.get('/api/tacos/:truck', tacos.getTacosByTruck);
 router.post('/api/tacos', tacos.addTaco);
 router.put('/api/tacos/:taco', tacos.updateTaco);

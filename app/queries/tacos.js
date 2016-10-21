@@ -2,16 +2,14 @@ var db = require('../../config/db');
 var helpers = require('./query_helpers');
 
 function getAllTacos(req, res){
-  var response = {};
-  db.Taco.find({}, function(err, data){
-    if (err) {
-      response = {"error" : true, "message" : "Error fetching data"};
-    } else {
-      response = {
-        data: helpers.parseData(data, 'name', 'truck', 'ingredients')
-      };
-    }
-    res.json(response);
+  db.Truck.findById(req.params.truckID, function(err, truck) {
+    db.Taco.find({truck: truck.name}, function(error, data){
+      if (err) {
+        res.json({"error" : true, "message" : "Error fetching data"});
+      } else {
+        res.json(helpers.parseData(data, 'name', 'ingredients'));
+      }
+    });
   });
 }
 
