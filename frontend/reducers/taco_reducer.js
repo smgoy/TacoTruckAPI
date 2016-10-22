@@ -11,8 +11,16 @@ export const TacoReducer = (state = initialState, action) => {
       return Object.assign({}, state, {tacoData: action.tacos});
     }
     case tacoConstants.RECEIVE_TACO: {
-      const tacos = state.tacoData.slice();
-      tacos.push(action.taco);
+      let tacos = state.tacoData.slice();
+      let update = false;
+      tacos = tacos.map(taco => {
+        if (taco.id === action.taco.id) {
+          update = true;
+          return action.taco;
+        }
+        return taco;
+      });
+      if (!update) tacos.push(action.taco);
       const newState = {tacoData: tacos, message: "Success!"};
       return Object.assign({}, newState);
     }

@@ -18,13 +18,12 @@ class DisplayTacos extends React.Component {
     this.setState({newTaco: e.currentTarget.value});
   }
 
-  addNewTaco(e) {
-    e.preventDefault();
+  parseTaco(str) {
     const regex = /[\w]+(\s+[\w]+)*/g;
     let m;
     let ingredients = [];
 
-    while ((m = regex.exec(this.state.newTaco)) !== null) {
+    while ((m = regex.exec(str)) !== null) {
 
         if (m.index === regex.lastIndex) {
             regex.lastIndex++;
@@ -34,8 +33,16 @@ class DisplayTacos extends React.Component {
             if(groupIndex === 0) ingredients.push(match);
         });
     }
+
+    return ingredients;
+  }
+
+  addNewTaco(e) {
+    e.preventDefault();
+    const ingredients = this.parseTaco(this.state.newTaco);
     const name = ingredients.shift();
     this.props.addTaco({name, ingredients, truckID: this.props.truckID});
+    this.setState({newTaco: ''});
   }
 
   addInputField() {
@@ -74,6 +81,17 @@ class DisplayTacos extends React.Component {
     this.setState({inputText: e.currentTarget.value});
   }
 
+  editTaco() {
+    const ingredients = this.parseTaco(this.state.inputText);
+    const name = ingredients.shift();
+    this.props.editTaco(this.state.tacoID, {
+      name,
+      ingredients,
+      truckID: this.props.truckID
+    });
+    this.revertEdit();
+  }
+
   inlineEdit() {
     return (
       <li key='input-list' className='tacos'>
@@ -84,6 +102,7 @@ class DisplayTacos extends React.Component {
         </input>
         <i key='check'
            className="fa fa-check"
+           onClick={this.editTaco.bind(this)}
            aria-hidden="true"></i>
         <i key='undo'
            className="fa fa-undo"

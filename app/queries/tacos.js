@@ -31,14 +31,18 @@ function addTaco(req, res) {
 }
 
 function updateTaco(req, res) {
-  var name = helpers.capitalize(req.params.taco.replace('-', ' '));
-  var query = req.query;
-  db.Taco.update({ name }, { $set: query }, function(err) {
-    if(err) {
-      res.json(err);
-    } else {
-      res.json({message: 'Taco updated'});
-    }
+  var tacoID = req.params.id;
+  db.Taco.findById(tacoID, function(err, taco){
+    taco.name = req.body.name;
+    taco.ingredients = req.body['ingredients[]'];
+
+    taco.save(function(error) {
+      if (error) {
+        res.json(error);
+      } else {
+        res.json({name: taco.name, id: taco.id, ingredients: taco.ingredients});
+      }
+    });
   });
 }
 
@@ -47,16 +51,12 @@ function deleteTaco(req, res) {
   console.log(tacoID);
   db.Taco.findById( tacoID, function(err, taco) {
     if (err) {
-      console.log('find error');
       res.json(err);
     } else {
       taco.remove(function(error) {
         if(error) {
-          console.log(taco);
-          console.log('remove error');
           res.json(error);
         } else {
-          console.log(taco);
           res.json({name: taco.name, id: taco.id, ingredients: taco.ingredients});
         }
       });

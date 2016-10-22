@@ -13,7 +13,7 @@ router.get('/', function(req, res, next) {
 //taco API routes
 router.get('/api/tacos/:truckID', tacos.getAllTacos);
 router.post('/api/tacos', tacos.addTaco);
-router.put('/api/tacos/:taco', tacos.updateTaco);
+router.put('/api/tacos/:id', tacos.updateTaco);
 router.delete('/api/tacos/:id', tacos.deleteTaco);
 
 //truck API routes

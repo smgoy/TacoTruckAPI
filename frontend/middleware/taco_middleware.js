@@ -4,7 +4,8 @@ import { tacoConstants,
          removeTaco } from '../actions/taco_actions';
 import { requestTacos,
          addTaco,
-         deleteTaco } from '../util/tacos_api_util';
+         deleteTaco,
+         editTaco } from '../util/tacos_api_util';
 
 const TacoMiddleware = ({dispatch}) => next => action => {
   switch(action.type) {
@@ -21,6 +22,11 @@ const TacoMiddleware = ({dispatch}) => next => action => {
     case tacoConstants.DELETE_TACO: {
       const success = taco => dispatch(removeTaco(taco));
       deleteTaco(success, action.id);
+      return next(action);
+    }
+    case tacoConstants.EDIT_TACO: {
+      const success = taco => dispatch(receiveTaco(taco));
+      editTaco(success, (error) => console.log(error), action.tacoID, action.taco);
       return next(action);
     }
   }

@@ -28,3 +28,14 @@ export const deleteTaco = (success, id) => {
     success
   });
 };
+
+export const editTaco = (success, error, tacoID, data) => {
+  $.ajax({
+    url: `api/tacos/${tacoID}`,
+    method: 'PUT',
+    dataType: 'json',
+    data,
+    success,
+    error
+  });
+};

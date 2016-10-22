@@ -4,7 +4,8 @@ export const tacoConstants = {
   ADD_TACO: "ADD_TACO",
   RECEIVE_TACO: "RECEIVE_TACO",
   DELETE_TACO: "DELETE_TACO",
-  REMOVE_TACO: "REMOVE_TACO"
+  REMOVE_TACO: "REMOVE_TACO",
+  EDIT_TACO: "EDIT_TACO"
 };
 
 export const requestTacos = truckID => ({
@@ -34,5 +35,11 @@ export const deleteTaco = id => ({
 
 export const removeTaco = taco => ({
   type: tacoConstants.REMOVE_TACO,
+  taco
+});
+
+export const editTaco = (tacoID, taco) => ({
+  type: tacoConstants.EDIT_TACO,
+  tacoID,
   taco
 });
