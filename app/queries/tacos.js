@@ -15,17 +15,18 @@ function getAllTacos(req, res){
 
 function addTaco(req, res) {
   var taco = new db.Taco();
-  console.log(req);
-  taco.name = req.body.name;
-  taco.truck = req.body.truck;
-  taco.ingredients = req.body.ingredients;
+  db.Truck.findById(req.body.truckID, function(err, truck) {
+    taco.truck = truck.name;
+    taco.name = req.body.name;
+    taco.ingredients = req.body['ingredients[]'];
 
-  taco.save(function(err) {
-    if (err) {
-      res.json(err);
-    } else {
-      res.json({name: taco.name, id: taco.id, ingredients: taco.ingredients});
-    }
+    taco.save(function(error) {
+      if (error) {
+        res.json(error);
+      } else {
+        res.json({name: taco.name, id: taco.id, ingredients: taco.ingredients});
+      }
+    });
   });
 }
 

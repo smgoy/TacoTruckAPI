@@ -10,6 +10,12 @@ export const TacoReducer = (state = initialState, action) => {
     case tacoConstants.RECEIVE_TACOS: {
       return Object.assign({}, state, {tacoData: action.tacos});
     }
+    case tacoConstants.RECEIVE_TACO: {
+      const tacos = state.tacoData.slice();
+      tacos.push(action.taco);
+      const newState = {tacoData: tacos, message: "Success!"};
+      return Object.assign({}, newState);
+    }
     default:
       return state;
   }

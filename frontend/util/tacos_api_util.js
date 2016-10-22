@@ -8,3 +8,14 @@ export const requestTacos = (success, truckID) => {
     success
   });
 };
+
+export const addTaco = (success, error, data) => {
+  $.ajax({
+    url: `api/tacos`,
+    method: 'POST',
+    dataType: 'json',
+    data,
+    success,
+    error
+  });
+};

@@ -30,12 +30,12 @@ class DisplayTacos extends React.Component {
             regex.lastIndex++;
         }
 
-        m.map((match, groupIndex) => {
+        m.forEach((match, groupIndex) => {
             if(groupIndex === 0) ingredients.push(match);
         });
     }
     const name = ingredients.shift();
-    console.log({name, ingredients, truckID: this.props.truckID});
+    this.props.addTaco({name, ingredients, truckID: this.props.truckID});
   }
 
   addInputField() {

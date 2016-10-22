@@ -1,6 +1,6 @@
 import React from 'react';
 import RaisedButton from 'material-ui/RaisedButton';
-import DisplayTacos from './display_tacos';
+import DisplayTacos from './display_tacos_container';
 
 class SeeTacos extends React.Component {
   constructor(props) {
