@@ -9,16 +9,42 @@ class DisplayTacos extends React.Component {
     this.state = {
       inputField: null,
       inputText: null,
-      tacoID: null
+      tacoID: null,
+      newTaco: ''
     };
+  }
+
+  updateTacoInfo(e) {
+    this.setState({newTaco: e.currentTarget.value});
+  }
+
+  addNewTaco(e) {
+    e.preventDefault();
+    const regex = /[\w]+(\s+[\w]+)*/g;
+    let m;
+    let ingredients = [];
+
+    while ((m = regex.exec(this.state.newTaco)) !== null) {
+
+        if (m.index === regex.lastIndex) {
+            regex.lastIndex++;
+        }
+
+        m.map((match, groupIndex) => {
+            if(groupIndex === 0) ingredients.push(match);
+        });
+    }
+    const name = ingredients.shift();
+    console.log({name, ingredients, truckID: this.props.truckID});
   }
 
   addInputField() {
     const textField = (
-      <form className='new-taco'>
+      <form className='new-taco' onSubmit={this.addNewTaco.bind(this)}>
         <TextField hintText="Format (Taco Name: Ingredient One, Ingredient Two, ...)"
                    floatingLabelText="Add a New Taco"
-                   style={{width: '100%'}}/>
+                   onChange={this.updateTacoInfo.bind(this)}
+                   style={{width: '100%'}} />
       </form>
     );
     this.setState({inputField: textField});
@@ -52,7 +78,7 @@ class DisplayTacos extends React.Component {
                onChange={this.updateText.bind(this)}>
         </input>
         <i key='check'
-           className="fa fa-check" 
+           className="fa fa-check"
            aria-hidden="true"></i>
         <i key='undo'
            className="fa fa-undo"

@@ -34,7 +34,8 @@ class SeeTacos extends React.Component {
                         style={{width: '100%'}} />
         </div>
         <DisplayTacos tacos={this.props.tacos}
-                       display={this.state.display} />
+                       display={this.state.display}
+                      truckID={this.props.truckID} />
       </div>
     );
   }

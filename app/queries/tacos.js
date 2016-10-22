@@ -15,15 +15,16 @@ function getAllTacos(req, res){
 
 function addTaco(req, res) {
   var taco = new db.Taco();
-  taco.name = req.query.name;
-  taco.truck = req.query.truck;
-  taco.ingredients = req.query.ingredients;
+  console.log(req);
+  taco.name = req.body.name;
+  taco.truck = req.body.truck;
+  taco.ingredients = req.body.ingredients;
 
   taco.save(function(err) {
     if (err) {
       res.json(err);
     } else {
-      res.json({ message: `${taco.name} created!` });
+      res.json({name: taco.name, id: taco.id, ingredients: taco.ingredients});
     }
   });
 }

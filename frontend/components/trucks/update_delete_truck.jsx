@@ -82,7 +82,7 @@ class UpdateDeleteTruck extends React.Component {
           <p className='description-text bottom-margin'>
             Update the truck's name or checkout it's tacos.
           </p>
-          <SeeTacos />
+          <SeeTacos truckID={this.state.truckID} />
         </div>
       );
     } else {
