@@ -135,6 +135,7 @@ form {
 
 .fa {
 	margin-left: 15px;
+	cursor: pointer;
 }
 
 .add-taco {
