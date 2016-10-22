@@ -30,6 +30,7 @@ body {
 
 #root {
 	margin: 50px 150px;
+	min-width: 684px;
 }
 
 .center-button {
@@ -127,6 +128,12 @@ form {
 .tacos {
 	padding: 10px 7px;
 	font-weight: 600;
+}
+
+.inline-edit {
+	padding: 10px 7px;
+	width: 400px;
+	border-radius: 5px;
 }
 
 .hide-trucks {

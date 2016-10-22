@@ -11,7 +11,6 @@ class DisplayTacos extends React.Component {
       inputText: null,
       tacoID: null
     };
-    this.dataChanged = this.dataChanged.bind(this);
   }
 
   addInputField() {
@@ -33,34 +32,40 @@ class DisplayTacos extends React.Component {
     });
   }
 
-  dataChanged(data){
-    debugger;
+  revertEdit() {
+    this.setState({
+      inputText: null,
+      tacoID: null
+    });
+  }
+
+  updateText(e){
+    this.setState({inputText: e.currentTarget.value});
   }
 
   inlineEdit() {
     return (
-      <InlineEdit activeClassName="editing"
-                  text={this.state.inputText}
-                  paramName="message"
-                  change={this.dataChanged}
-                  style={{
-                    backgroundColor: 'yellow',
-                    minWidth: 150,
-                    display: 'inline-block',
-                    margin: 0,
-                    padding: 0,
-                    fontSize: 15,
-                    outline: 0,
-                    border: 0
-                  }} />
+      <li key='input-list' className='tacos'>
+        <input key='input text'
+               className='inline-edit'
+               value={this.state.inputText}
+               onChange={this.updateText.bind(this)}>
+        </input>
+        <i key='check'
+           className="fa fa-check" 
+           aria-hidden="true"></i>
+        <i key='undo'
+           className="fa fa-undo"
+           aria-hidden="true"
+           onClick={this.revertEdit.bind(this)}></i>
+      </li>
         );
   }
 
   displayTacos() {
     const {tacos} = this.props;
 
-    debugger;
-    const displayTacos = tacos.map(taco => {
+    return tacos.map(taco => {
       if (taco.id === this.state.tacoID) return this.inlineEdit();
       let ingredients = '';
       taco.ingredients.forEach(ingredient => (
