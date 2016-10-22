@@ -43,18 +43,21 @@ function updateTaco(req, res) {
 }
 
 function deleteTaco(req, res) {
-  var name = helpers.capitalize(req.params.taco.replace('-', ' '));
-  db.Taco.findOne({
-    name
-  }, function(err, taco) {
+  var tacoID = req.params.id;
+  console.log(tacoID);
+  db.Taco.findById( tacoID, function(err, taco) {
     if (err) {
+      console.log('find error');
       res.json(err);
     } else {
       taco.remove(function(error) {
         if(error) {
+          console.log(taco);
+          console.log('remove error');
           res.json(error);
         } else {
-          res.json({message: `${name} deleted`});
+          console.log(taco);
+          res.json({name: taco.name, id: taco.id, ingredients: taco.ingredients});
         }
       });
     }

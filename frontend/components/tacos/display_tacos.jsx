@@ -58,6 +58,11 @@ class DisplayTacos extends React.Component {
     });
   }
 
+  deleteTaco(e) {
+    const listElement = $(e.currentTarget).parent();
+    this.props.deleteTaco(listElement.data('id'));
+  }
+
   revertEdit() {
     this.setState({
       inputText: null,
@@ -109,6 +114,7 @@ class DisplayTacos extends React.Component {
            aria-hidden="true"></i>
         <i key={`delete-${taco.name}`}
            className="fa fa-trash"
+           onClick={this.deleteTaco.bind(this)}
            aria-hidden="true"></i>
         </li>
       );

@@ -19,3 +19,12 @@ export const addTaco = (success, error, data) => {
     error
   });
 };
+
+export const deleteTaco = (success, id) => {
+  $.ajax({
+    url: `api/tacos/${id}`,
+    method: 'DELETE',
+    dataType: 'json',
+    success
+  });
+};

@@ -2,7 +2,9 @@ export const tacoConstants = {
   REQUEST_TACOS: "REQUEST_TACOS",
   RECEIVE_TACOS: "RECEIVE_TACOS",
   ADD_TACO: "ADD_TACO",
-  RECEIVE_TACO: "RECEIVE_TACO"
+  RECEIVE_TACO: "RECEIVE_TACO",
+  DELETE_TACO: "DELETE_TACO",
+  REMOVE_TACO: "REMOVE_TACO"
 };
 
 export const requestTacos = truckID => ({
@@ -22,5 +24,15 @@ export const addTaco = tacoInfo => ({
 
 export const receiveTaco = taco => ({
   type: tacoConstants.RECEIVE_TACO,
+  taco
+});
+
+export const deleteTaco = id => ({
+  type: tacoConstants.DELETE_TACO,
+  id
+});
+
+export const removeTaco = taco => ({
+  type: tacoConstants.REMOVE_TACO,
   taco
 });

@@ -16,6 +16,13 @@ export const TacoReducer = (state = initialState, action) => {
       const newState = {tacoData: tacos, message: "Success!"};
       return Object.assign({}, newState);
     }
+    case tacoConstants.REMOVE_TACO: {
+      const tacos = state.tacoData.slice();
+      const idx = tacos.indexOf(action.taco);
+      tacos.splice(idx, 1);
+      const newState = {tacoData: tacos, message: 'Success!'};
+      return Object.assign({}, newState);
+    }
     default:
       return state;
   }
