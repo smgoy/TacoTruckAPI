@@ -1,7 +1,7 @@
 import React from 'react';
 import InlineEdit from 'react-edit-inline';
 import TextField from 'material-ui/TextField';
-import $ from 'JQuery';
+import $ from 'jquery';
 
 class DisplayTacos extends React.Component {
   constructor(props) {

@@ -1,4 +1,4 @@
-import $ from 'JQuery';
+import $ from 'jquery';
 
 export const requestTacos = (success, truckID) => {
   $.ajax({

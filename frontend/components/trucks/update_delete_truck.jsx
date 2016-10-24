@@ -1,5 +1,5 @@
 import React from 'react';
-import $ from 'JQuery';
+import $ from 'jquery';
 import InputBar from './input_bar_container';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
