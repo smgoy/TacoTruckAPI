@@ -1,5 +1,8 @@
 //Standard display for tacos
-function parseData (data, dataLabels) {
+function parseData () {
+  var values = Array.prototype.slice.call(arguments);
+  var data = values[0];
+  var dataLabels = values.slice(1, values.length);
   return data.map( datum => {
     var result = {};
     dataLabels.forEach(label => {
