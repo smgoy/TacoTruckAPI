@@ -49,6 +49,7 @@ class UpdateDeleteTruck extends React.Component {
   }
 
   selectTruck(event, index, value) {
+    console.log(event.target.value);
     if (value) this.props.requestTacos(value);
     let showInputBar = true;
     if (value === null) showInputBar = false;
@@ -120,7 +121,7 @@ class UpdateDeleteTruck extends React.Component {
                        style={{width: '100%'}}>
             <MenuItem value={null} primaryText="" />
             {this.displayOptions()}
-        </SelectField>
+          </SelectField>
           {this.inputBar()}
         </form>
         {this.seeTruckOptions()}
