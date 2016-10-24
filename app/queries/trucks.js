@@ -49,6 +49,7 @@ function updateTruck(req, res) {
 function deleteTruck(req, res) {
   var id = req.params.id;
   db.Truck.findById(id, function(err, truck) {
+    var deletedTruck = truck;
     if (err) {
       res.json(err);
     } else {
@@ -56,7 +57,7 @@ function deleteTruck(req, res) {
         if(error) {
           res.json(error);
         } else {
-          res.json({name: truck.name, id: truck.id});
+          res.json({name: deletedTruck.name, id: deletedTruck.id});
         }
       });
     }
