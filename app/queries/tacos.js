@@ -50,6 +50,7 @@ function deleteTaco(req, res) {
   var tacoID = req.params.id;
   console.log(tacoID);
   db.Taco.findById( tacoID, function(err, taco) {
+    var deletedTaco = taco;
     if (err) {
       res.json(err);
     } else {
@@ -57,7 +58,11 @@ function deleteTaco(req, res) {
         if(error) {
           res.json(error);
         } else {
-          res.json({name: taco.name, id: taco.id, ingredients: taco.ingredients});
+          res.json({
+            name: deletedTaco.name,
+            id: deletedTaco.id,
+            ingredients: deletedTaco.ingredients
+          });
         }
       });
     }

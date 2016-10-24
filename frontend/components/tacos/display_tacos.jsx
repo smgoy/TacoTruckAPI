@@ -1,5 +1,4 @@
 import React from 'react';
-import InlineEdit from 'react-edit-inline';
 import TextField from 'material-ui/TextField';
 import $ from 'jquery';
 
@@ -33,7 +32,6 @@ class DisplayTacos extends React.Component {
             if(groupIndex === 0) ingredients.push(match);
         });
     }
-
     return ingredients;
   }
 
@@ -42,7 +40,6 @@ class DisplayTacos extends React.Component {
     const ingredients = this.parseTaco(this.state.newTaco);
     const name = ingredients.shift();
     this.props.addTaco({name, ingredients, truckID: this.props.truckID});
-    this.setState({newTaco: ''});
   }
 
   addInputField() {
@@ -123,15 +120,15 @@ class DisplayTacos extends React.Component {
       ));
       ingredients = ingredients.slice(0, -2);
       return (
-        <li key={`taco-${taco.name}`}
+        <li key={`taco-${taco.id}`}
             className='tacos'
             data-id={taco.id}>
           {taco.name}: <span className='ingredients'>{ingredients}</span>
-        <i key={`edit-${taco.name}`}
+        <i key={`edit-${taco.id}`}
            className="fa fa-pencil"
            onClick={this.inputify.bind(this)}
            aria-hidden="true"></i>
-        <i key={`delete-${taco.name}`}
+         <i key={`delete-${taco.id}`}
            className="fa fa-trash"
            onClick={this.deleteTaco.bind(this)}
            aria-hidden="true"></i>

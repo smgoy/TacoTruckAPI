@@ -26,7 +26,10 @@ export const TacoReducer = (state = initialState, action) => {
     }
     case tacoConstants.REMOVE_TACO: {
       const tacos = state.tacoData.slice();
-      const idx = tacos.indexOf(action.taco);
+      let idx;
+      tacos.forEach((taco, index) => {
+        if (taco.id === action.taco.id) idx = index;
+      });
       tacos.splice(idx, 1);
       const newState = {tacoData: tacos, message: 'Success!'};
       return Object.assign({}, newState);

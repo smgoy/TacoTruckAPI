@@ -40,8 +40,6 @@ class InputBar extends React.Component {
                    floatingLabelText={this.props.placeholder}
                    hintText={this.props.hint}
                    onChange={this.props.updateName}
-                   underlineFocusStyle={{color: '#626e60'}}
-                   floatingLabelFocusStyle={{color: '#626e60'}}
                    style={{width: '100%'}} />
         <Snackbar open={this.state.open}
                   message={this.state.message}
