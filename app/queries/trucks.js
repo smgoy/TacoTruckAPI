@@ -7,7 +7,7 @@ function getAllTrucks(req, res) {
     if (err) {
       response = {"error" : true, "message" : "Error fetching data"};
     } else {
-      response = helpers.parseData(data, 'name', 'id');
+      response = data;
     }
     res.json(response);
   });

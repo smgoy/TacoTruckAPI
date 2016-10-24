@@ -1,5 +1,5 @@
 //Standard display for tacos
-function parseData(data, ...dataLabels) {
+function parseData (data, dataLabels) {
   return data.map( datum => {
     var result = {};
     dataLabels.forEach(label => {
