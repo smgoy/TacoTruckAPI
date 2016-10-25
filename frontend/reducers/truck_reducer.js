@@ -33,7 +33,10 @@ export const TruckReducer = (state = initialState, action) => {
     }
     case truckConstants.REMOVE_TRUCK: {
       const trucks = state.trucksData.slice();
-      const idx = trucks.indexOf(action.truck);
+      let idx;
+      trucks.forEach((truck, index) => {
+        if (truck.id === action.truck.id) idx = index;
+      });
       trucks.splice(idx, 1);
       const newState = {trucksData: trucks, message: 'Success!'};
       return Object.assign({}, newState);
