@@ -192,6 +192,10 @@ class DisplayTacos extends React.Component {
                   onRequestClose={this.handleRequestClose.bind(this)}
                   bodyStyle={{backgroundColor: '#af473c'}}
                   contentStyle={{textAlign: 'center'}} />
+        <p className='description-text'>
+          Thank you for visiting my Taco Truck API!
+          Hope you're not too hungry now. 
+        </p>
       </div>
     );
   }
