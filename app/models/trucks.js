@@ -4,7 +4,7 @@ var uniqueValidator = require('mongoose-unique-validator');
 var TruckSchema = mongoose.Schema({
   name: {
     type : String,
-    unique: [true, 'The truck name you chose is already taken'],
+    unique: true,
     required: [true, 'You must enter a truck name']
   }
 });

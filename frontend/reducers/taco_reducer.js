@@ -21,7 +21,7 @@ export const TacoReducer = (state = initialState, action) => {
         return taco;
       });
       if (!update) tacos.push(action.taco);
-      const newState = {tacoData: tacos, message: "Success!"};
+      const newState = {tacoData: tacos, message: null};
       return Object.assign({}, newState);
     }
     case tacoConstants.REMOVE_TACO: {
@@ -31,8 +31,22 @@ export const TacoReducer = (state = initialState, action) => {
         if (taco.id === action.taco.id) idx = index;
       });
       tacos.splice(idx, 1);
-      const newState = {tacoData: tacos, message: 'Success!'};
+      const newState = {tacoData: tacos, message: null};
       return Object.assign({}, newState);
+    }
+    case tacoConstants.RECEIVE_TACO_ERRORS: {
+      const errors = [];
+      if (action.errors.responseJSON.name) {
+        errors.push(action.errors.responseJSON.name.message);
+      }
+      if (action.errors.responseJSON.ingredients) {
+        errors.push(action.errors.responseJSON.ingredients.message);
+      }
+      const errorMessage = errors.join(' and ') + ' are required';
+      return Object.assign({}, state, {message: errorMessage});
+    }
+    case tacoConstants.CLEAR_TACO_ERRORS: {
+      return Object.assign({}, state, {message: null});
     }
     default:
       return state;

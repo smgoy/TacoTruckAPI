@@ -20,7 +20,7 @@ function addTruck(req, res) {
   truck.save(function(err) {
     if (err) {
       res.status(422);
-      res.json(err.errors.name.message);
+      res.json(err.errors.name);
     } else {
       res.json({name: truck.name, id: truck.id});
     }
@@ -37,7 +37,7 @@ function updateTruck(req, res) {
       truck.save(function(error) {
         if(error) {
           res.status(422);
-          res.json(error.errors.name.message);
+          res.json(error.errors.name);
         } else {
           res.json({name: truck.name, id: truck.id});
         }

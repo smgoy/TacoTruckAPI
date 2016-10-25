@@ -22,7 +22,8 @@ function addTaco(req, res) {
 
     taco.save(function(error) {
       if (error) {
-        res.json(error);
+        res.status(422);
+        res.json(error.errors);
       } else {
         res.json({name: taco.name, id: taco.id, ingredients: taco.ingredients});
       }
@@ -38,7 +39,8 @@ function updateTaco(req, res) {
 
     taco.save(function(error) {
       if (error) {
-        res.json(error);
+        res.status(422);
+        res.json(error.errors);
       } else {
         res.json({name: taco.name, id: taco.id, ingredients: taco.ingredients});
       }

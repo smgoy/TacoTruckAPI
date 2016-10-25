@@ -26,7 +26,7 @@ export const TruckReducer = (state = initialState, action) => {
       return Object.assign({}, newState);
     }
     case truckConstants.RECEIVE_ERRORS: {
-      return Object.assign({}, state, {message: action.errors.responseText});
+      return Object.assign({}, state, {message: action.errors.responseJSON.message});
     }
     case truckConstants.CLEAR_ERRORS: {
       return Object.assign({}, state, {message: null});

@@ -6,11 +6,16 @@ class DisplayTacos extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      inputField: null,
+      inputField: false,
       inputText: null,
       tacoID: null,
-      newTaco: ''
+      newTaco: '',
+      errorMessage: null
     };
+  }
+
+  componentWillReceiveProps(newProps) {
+    this.setState({errorMessage: newProps.message});
   }
 
   updateTacoInfo(e) {
@@ -37,21 +42,32 @@ class DisplayTacos extends React.Component {
 
   addNewTaco(e) {
     e.preventDefault();
+    this.props.clearTacoErrors();
     const ingredients = this.parseTaco(this.state.newTaco);
     const name = ingredients.shift();
     this.props.addTaco({name, ingredients, truckID: this.props.truckID});
+    this.setState({newTaco: ''});
+  }
+
+  displayInput() {
+    if (this.state.inputField) {
+      return(
+        <form className='new-taco' onSubmit={this.addNewTaco.bind(this)}>
+          <TextField hintText="Taco Name: Ingredient One, Ingredient Two, ..."
+                     value={this.state.newTaco}
+                     errorText={this.state.errorMessage}
+                     floatingLabelText="Add a New Taco"
+                     onChange={this.updateTacoInfo.bind(this)}
+                     style={{width: '100%'}} />
+        </form>
+      );
+    } else {
+      return null;
+    }
   }
 
   addInputField() {
-    const textField = (
-      <form className='new-taco' onSubmit={this.addNewTaco.bind(this)}>
-        <TextField hintText="Format (Taco Name: Ingredient One, Ingredient Two, ...)"
-                   floatingLabelText="Add a New Taco"
-                   onChange={this.updateTacoInfo.bind(this)}
-                   style={{width: '100%'}} />
-      </form>
-    );
-    this.setState({inputField: textField});
+    this.setState({inputField: true});
   }
 
   inputify(e) {
@@ -140,7 +156,7 @@ class DisplayTacos extends React.Component {
   render() {
     const {tacos, display} = this.props;
 
-    if (display === 'hide-trucks') this.state.inputField = null;
+    if (display === 'hide-trucks') this.state.inputField = false;
 
     return (
       <div className={display}>
@@ -151,7 +167,7 @@ class DisplayTacos extends React.Component {
             - Add Taco -
           </a>
         </ul>
-        {this.state.inputField}
+        {this.displayInput()}
       </div>
     );
   }
