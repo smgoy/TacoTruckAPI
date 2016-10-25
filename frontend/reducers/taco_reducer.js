@@ -2,7 +2,8 @@ import { tacoConstants } from '../actions/taco_actions';
 
 const initialState = {
   tacoData: [],
-  message: null
+  newMessage: '',
+  editMessage: ''
 };
 
 export const TacoReducer = (state = initialState, action) => {
@@ -21,8 +22,7 @@ export const TacoReducer = (state = initialState, action) => {
         return taco;
       });
       if (!update) tacos.push(action.taco);
-      const newState = {tacoData: tacos, message: null};
-      return Object.assign({}, newState);
+      return Object.assign({}, state, {tacoData: tacos});
     }
     case tacoConstants.REMOVE_TACO: {
       const tacos = state.tacoData.slice();
@@ -31,22 +31,39 @@ export const TacoReducer = (state = initialState, action) => {
         if (taco.id === action.taco.id) idx = index;
       });
       tacos.splice(idx, 1);
-      const newState = {tacoData: tacos, message: null};
-      return Object.assign({}, newState);
+      return Object.assign({}, state, {tacoData: tacos});
     }
     case tacoConstants.RECEIVE_TACO_ERRORS: {
       const errors = [];
-      if (action.errors.responseJSON.name) {
-        errors.push(action.errors.responseJSON.name.message);
+      let error;
+      if (action.errors.responseJSON.edit) {
+        error = action.errors.responseJSON.edit;
+      } else {
+        error = action.errors.responseJSON.new;
       }
-      if (action.errors.responseJSON.ingredients) {
-        errors.push(action.errors.responseJSON.ingredients.message);
+      if (error.name) {
+        errors.push(error.name.message);
       }
+      if (error.ingredients) {
+        errors.push(error.ingredients.message);
+      }
+      let message;
       const errorMessage = errors.join(' and ') + ' are required';
-      return Object.assign({}, state, {message: errorMessage});
+      if (action.errors.responseJSON.edit) {
+        message = {editMessage: errorMessage};
+      } else {
+        message = {newMessage: errorMessage};
+      }
+      return Object.assign({}, state, message);
     }
     case tacoConstants.CLEAR_TACO_ERRORS: {
-      return Object.assign({}, state, {message: null});
+      let message;
+      if (action.kind === 'edit') {
+        message = {editMessage: ''};
+      } else {
+        message = {newMessage: ''};
+      }
+      return Object.assign({}, state, message);
     }
     default:
       return state;

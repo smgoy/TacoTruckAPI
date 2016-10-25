@@ -51,6 +51,7 @@ export const receiveTacoErrors = errors => ({
   errors
 });
 
-export const clearTacoErrors = () => ({
-  type: tacoConstants.CLEAR_TACO_ERRORS
+export const clearTacoErrors = kind => ({
+  type: tacoConstants.CLEAR_TACO_ERRORS,
+  kind
 });

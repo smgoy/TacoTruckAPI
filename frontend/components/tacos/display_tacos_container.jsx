@@ -9,11 +9,12 @@ const mapDispatchToProps = dispatch => ({
   addTaco: tacoInfo => dispatch(addTaco(tacoInfo)),
   deleteTaco: id => dispatch(deleteTaco(id)),
   editTaco: (tacoID, taco) => dispatch(editTaco(tacoID, taco)),
-  clearTacoErrors: () => dispatch(clearTacoErrors())
+  clearTacoErrors: type => dispatch(clearTacoErrors(type))
 });
 
 const mapStateToProps = state => ({
-  message: state.tacos.message
+  newMessage: state.tacos.newMessage,
+  editMessage: state.tacos.editMessage
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(DisplayTacos);
