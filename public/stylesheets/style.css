@@ -23,14 +23,24 @@ ol, ul {
 	list-style: none;
 }
 
+a:visited {
+	color: inherit;
+}
+
 body {
   font-family: 'Raleway', sans-serif;
 	color: #3c3c3c;
 }
 
 #root {
-	margin: 50px 150px;
+	margin: 15px 150px 50px 150px;
 	min-width: 684px;
+}
+
+.title {
+	font-size: 30px;
+	font-weight: 700;
+	text-align: center;
 }
 
 .center-button {
@@ -108,6 +118,31 @@ form {
 }
 
 .bottom-margin {
+	margin-bottom: 25px;
+}
+
+.colored {
+	font-size: 75px;
+}
+
+.icon-row-tech {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+}
+
+.icon-row-tech i:not(:last-child) {
+	margin-right: 50px;
+}
+
+.icon-row-job {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+
+.size {
+	font-size: 50px;
 	margin-bottom: 25px;
 }
 
