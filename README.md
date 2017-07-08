@@ -1,4 +1,4 @@
-#Taco Truck API
+# Taco Truck API
 
 Welcome to my Taco Truck API. This RESTful API serves a simple CRUD application to keep track of taco trucks and the different tacos they sell. Fun! The purpose of this applications was to familiarize myself with creating a NodeJS backend and a noSQL database.
 
@@ -6,7 +6,7 @@ Welcome to my Taco Truck API. This RESTful API serves a simple CRUD application 
 
 This README will be used to help myself walk through what I have learned.
 
-##Technologies
+## Technologies
 
 Backend:
 - NodeJS
@@ -18,7 +18,7 @@ Frontend:
 - React
 - Redux
 
-##noSQL
+## noSQL
 
 I am familiar with SQL—a database containing tables, rows and columns—but I wanted to explore the world of noSQL—a database with collections and documents.
 
@@ -55,7 +55,7 @@ One thing I found pretty cool about a noSQL database was the flexibility of data
 
 Arrays are valid values! This is pretty cool and simplifies SQL's dreaded joins. However, it's pretty easy to think of a situation where an array within a document could get infinitely large or be unnecessarily repeating data. But without joins how can we refer to other documents?
 
-##Look ma, no joins!
+## Look ma, no joins!
 
 Just as arrays are valid keys, documents are too, known as 'embedded documents'. Let's take a look at my Tacos collection to see how this could work.
 
@@ -104,10 +104,10 @@ In this case the ingredients are an array of documents referencing the individua
 
 In my case of the Tacos collection, I chose to use and array of the ingredients names because the name was the only attribute I was interested in; however, if I were to have included nutritional facts, I would have used embedded documents.
 
-###noSQL Conclusion
+### noSQL Conclusion
 What I understand about noSQL is it's a lot easier to scale and change collection's structure, but without that structure that SQL databases have, you loose the ability to slice and associate data as well as SQL databases.
 
-##Validations
+## Validations
 
 Validations were a bit different with MongoDB, luckily Mongoose provides a great API to help out with writing validations.
 
@@ -147,7 +147,7 @@ function addTruck(req, res) {
 
 `truck.save()` takes a callback where if an error occurs, it can be accessed at the errors key. Here I am sending the errors specific to the name key in the Truck collection (remember the truck collection only holds a name).
 
-##API Endpoints
+## API Endpoints
 
 Express helped out a lot with their built in router. My API hosts endpoints for both Tacos and Trucks.
 
@@ -183,7 +183,7 @@ function getAllTrucks(req, res) {
 
 The callback takes two arguments—request and response. The request contains all of the information the client sent on request and in this case the response is sent back in JSON format with the requested information (given there is no error).
 
-##Conclusion
+## Conclusion
 
 Node and Express were both fun to work with and and interesting transition coming from Rails—which takes out a lot of the decisions I had to make with Node. With this project I learnt a lot more about how the server interacts with the database server and connects to the frontend of an application.
 
